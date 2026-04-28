@@ -91,6 +91,8 @@ async function solveMath() {
     document.getElementById("solution").innerHTML = "❌ Error";
 }
 
+}
+
 function watchAd() {
     if (window.Android) {
         Android.showRewardedAd(); // 🔥 CALL ANDROID
