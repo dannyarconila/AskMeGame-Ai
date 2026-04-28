@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ask Me!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- 💰 COINS -->
+<div id="coinHUD">💰 <span id="globalCoins">0</span></div>
+
+<!-- 🌿 BACKGROUND -->
+<div class="bg-decor"></div>
+
+<!-- 🎁 DAILY REWARD -->
+<div id="dailyPopup" class="daily-popup">
+    <div class="daily-card">
+        <h2>🎁 Daily Reward</h2>
+        <p>You received <b>+10 coins!</b></p>
+        <button onclick="closeDailyPopup()">Collect</button>
+    </div>
+</div>
+
+<!-- 🌿 MAIN MENU -->
+<div class="menu" id="mainMenu">
+    <h1 class="title">🌿 Ask Me!</h1>
+
+    <button class="difficulty easy" onclick="openDifficulty()">▶ New Game</button>
+    <button class="difficulty medium" onclick="continueGame()">⏯ Continue</button>
+    <button class="difficulty hard" onclick="openOptions()">⚙ Options</button>
+</div>
+
+<!-- 🧠 SOLVER -->
+<div class="menu" id="solver">
+    <h3>🧠 Help Me Solve!</h3>
+    <p class="solver-instruction">✍️ Type math problems here</p>
+
+    <div>🎁 Free Solves: <span id="freeSolves">0</span></div>
+
+    <textarea id="mathInput" placeholder="Type your math problem here..."></textarea>
+
+    <button onclick="solveMath()">Solve</button>
+
+    <div class="solution-box">
+        <div id="solution"></div>
+    </div>
+</div>
+
+<!-- 🎯 DIFFICULTY -->
+<div class="menu" id="menu" style="display:none;">
+    <h1 class="title">🎯 Choose Difficulty</h1>
+
+    <button class="difficulty easy" onclick="startGame('easy')">Easy</button>
+    <button class="difficulty medium" onclick="startGame('medium')">Medium</button>
+    <button class="difficulty hard" onclick="startGame('hard')">Hard</button>
+
+    <button class="difficulty medium" onclick="backToMain()">⬅ Back</button>
+</div>
+
+<!-- 📚 SUBJECT -->
+<div id="subjectMenu" class="menu" style="display:none;">
+    <h1 class="title">📚 Choose Subject</h1>
+
+    <button class="difficulty easy" onclick="selectSubject('math')">Math</button>
+    <button class="difficulty easy" onclick="selectSubject('english')">English</button>
+    <button class="difficulty easy" onclick="selectSubject('history')">History</button>
+    <button class="difficulty easy" onclick="selectSubject('physics')">Physics</button>
+    <button class="difficulty easy" onclick="selectSubject('mechanics')">Industrial Mechanics</button>
+
+    <button class="difficulty medium" onclick="backToDifficulty()">⬅ Back</button>
+</div>
+
+<!-- 🎮 GAME -->
+<div class="game-wrapper" id="game" style="display:none;">
+
+    <div class="top-bar">
+        <button class="back-btn" onclick="goBack()">⬅</button>
+        <div class="timer">⏱ <span id="timer">10</span></div>
+        <div class="coins">💰 <span id="coins">0</span></div>
+    </div>
+
+    <div class="game-card">
+        <h2 id="question">Question here</h2>
+        <div id="choices"></div>
+
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+
+        <h3 id="score"></h3>
+    </div>
+
+</div>
+
+<!-- 🪟 GAME OVER -->
+<div id="gameOverModal" class="game-over-modal">
+    <div class="game-over-card">
+        <h2>⏰ Time's Up!</h2>
+        <p id="finalScore"></p>
+
+        <button onclick="continueGame()">▶ Continue</button>
+        <button onclick="exitGame()">❌ Exit</button>
+    </div>
+</div>
+
+<!-- ⚙ OPTIONS -->
+<div id="optionsModal" class="skip-modal">
+    <div class="skip-card">
+        <h3>⚙ Options</h3>
+
+        <p>🔊 Sound</p>
+
+        <!-- 🔥 NICE TOGGLE -->
+        <label class="switch">
+            <input type="checkbox" id="soundToggle" onchange="toggleSound()">
+            <span class="slider"></span>
+        </label>
+
+        <button onclick="showAbout()">ℹ About</button>
+        <button onclick="closeOptions()">❌ Close</button>
+    </div>
+</div>
+
+<!-- ⏭ SKIP -->
+<div id="skipModal" class="skip-modal">
+    <div class="skip-card">
+        <h3>⏭ Skip Question?</h3>
+        <p>Cost: 5 coins</p>
+
+        <button onclick="confirmSkip()">💰 Use Coins</button>
+        <button onclick="watchAdSkip()">🎥 Watch Ads</button>
+        <button onclick="closeSkipModal()">❌ Cancel</button>
+    </div>
+</div>
+
+<!-- 🚨 ALERT -->
+<div id="alertModal" class="skip-modal">
+    <div class="skip-card">
+        <h3 id="alertText">Message</h3>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+</div>
+
+<!-- 🔊 AUDIO (IMPORTANT: LAST PART) -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SCRIPTS -->
+<script src="data/questions.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

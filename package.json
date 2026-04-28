@@ -1,0 +1,19 @@
+{
+  "name": "askmequizgame",
+  "version": "1.0.0",
+  "description": "Quiz Game with AI Solver",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "openai": "^4.0.0"
+  }
+}
