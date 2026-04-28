@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
@@ -101,78 +100,8 @@ app.get("/", (req, res) => {
 /* =========================
    🚀 START SERVER
 ========================= */
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`🔥 Server running at http://localhost:${PORT}`);
 });
-=======
-import express from "express";
-import cors from "cors";
-import OpenAI from "openai";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-});
-
-app.post("/solve", async (req, res) => {
-    const { problem } = req.body;
-
-    if (!problem) {
-        return res.status(400).json({ error: "No problem provided" });
-    }
-
-    try {
-        const response = await client.responses.create({
-            model: "gpt-4.1-mini",
-            input: `
-You are a math tutor.
-
-Solve the problem step by step.
-
-RULES:
-- Use plain text only
-- Do NOT use symbols like #, *, /, \\, or markdown
-- Do NOT use code formatting
-- Keep it simple and clean
-- Use this format only:
-
-Step 1: ...
-Step 2: ...
-Final Answer: ...
-
-Problem:
-${problem}
-`
-        });
-
-        res.json({
-            answer: response.output_text
-        });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "AI error" });
-    }
-});
-
-// 🔥 FIXED ROOT
-app.get("/", (req, res) => {
-    res.send("AI Server Running 🚀");
-});
-
-// 🔥 IMPORTANT
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log("Server running on port " + PORT);
-});
->>>>>>> 685afff478777c802dc87ca7c28feac69c4e1ee5
