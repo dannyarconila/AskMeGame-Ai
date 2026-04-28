@@ -75,35 +75,38 @@ async function solveMath() {
     document.getElementById("solution").innerHTML = "⏳ Solving...";
 
     try {
-        let response = await fetch("http://localhost:3000/solve", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ problem: input })
-        });
+    let response = await fetch("https://askmegame-ai-1.onrender.com/solve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ problem: input })
+    });
 
-        let data = await response.json();
+    let data = await response.json();
 
-        document.getElementById("solution").innerText =
-            data.answer || "❌ No answer";
+    document.getElementById("solution").innerText =
+        data.answer || "❌ No answer";
 
-    } catch {
-        document.getElementById("solution").innerHTML = "❌ Error";
-    }
+} catch (error) {
+    console.log(error);
+    document.getElementById("solution").innerHTML = "❌ Error";
 }
 
 function watchAd() {
-    document.getElementById("solution").innerHTML = "🎥 Watching ad...";
+    if (window.Android) {
+        Android.showRewardedAd(); // 🔥 CALL ANDROID
+    } else {
+        onSolveAdReward(); // fallback
+    }
+}
 
-    setTimeout(() => {
-        freeSolves += 1;
-        localStorage.setItem("freeSolves", freeSolves);
+function onSolveAdReward() {
+    freeSolves += 1;
+    localStorage.setItem("freeSolves", freeSolves);
 
-        // 🔥 ADD NI PARA MO UPDATE
-        document.getElementById("freeSolves").innerText = freeSolves;
+    document.getElementById("freeSolves").innerText = freeSolves;
 
-        document.getElementById("solution").innerHTML =
-            "✅ You got 1 free solve!";
-    }, 3000);
+    document.getElementById("solution").innerHTML =
+        "✅ You got 1 free solve!";
 }
 
 function showOnly(screen) {
@@ -417,15 +420,16 @@ function confirmSkip() {
 }
 
 function watchAdSkip() {
-    document.getElementById("solution").innerHTML = "🎥 Watching ad...";
+    if (window.Android) {
+        Android.showRewardedAd(); // 🔥 reuse rewarded ad
+    } else {
+        onSkipAdReward();
+    }
+}
 
-    setTimeout(() => {
-        document.getElementById("solution").innerHTML =
-            "✅ Skip unlocked!";
-
-        currentQuestion++;
-        loadQuestion();
-    }, 3000);
+function onSkipAdReward() {
+    currentQuestion++;
+    loadQuestion();
 }
 
 /* =========================
