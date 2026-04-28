@@ -216,7 +216,7 @@ async function loadQuestion() {
 
     try {
         // 🧠 TRY AI FIRST
-        let res = await fetch("http://localhost:3000/generate-question", {
+        let res = await fetch("https://askmegame-ai-1.onrender.com/generate-question", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
